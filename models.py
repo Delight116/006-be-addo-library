@@ -16,6 +16,8 @@ class BaseModel(pw.Model):
     class Meta:
         database = db
 
+class Autors(BaseModel):
+    name = pw.CharField(max_length=100, null=False)
 
 class Client(BaseModel):
     first_name = pw.CharField(null=False)
@@ -30,12 +32,11 @@ class Ganre(BaseModel):
 class Books(BaseModel):
     name = pw.CharField(unique=True, null=False)
     ganre = pw.ForeignKeyField(Ganre)
+    autor = pw.ForeignKeyField(Autors)
     year = pw.IntegerField(null=False)
     publisher = pw.CharField(null=False)
 
-class Autors(BaseModel):
-    name = pw.CharField(max_length=100, null=False)
 
 class Authors_Books(BaseModel):
     book = pw.ForeignKeyField(Books)
-    author = pw.ForeignKeyField(Autors)
+    otherAuthors = pw.ForeignKeyField(Autors)
